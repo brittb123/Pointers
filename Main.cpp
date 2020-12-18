@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Game.h"
 
 void changeNumber(int& num) {
@@ -16,5 +17,8 @@ int main()
 	system("pause");
 	Game game = Game();
 	game.run();
+
+	
+
 	return 0;
 }

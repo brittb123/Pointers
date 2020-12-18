@@ -6,7 +6,7 @@ Character::Character()
 	m_damage = 10;
 }
 
-Character::Character(float health, float damage)
+Character::Character( float health, float damage)
 {
 	m_health = health;
 	m_damage = damage;

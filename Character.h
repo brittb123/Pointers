@@ -4,6 +4,7 @@ class Character
 public:
 	Character();
 	Character(float health, float damage);
+	
 
 	void attack(Character* other);
 	float takeDamage(float damageAmount);
@@ -14,4 +15,5 @@ public:
 
 	float m_health;
 	float m_damage;
+	
 };
