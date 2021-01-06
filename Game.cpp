@@ -84,9 +84,9 @@ void Game::start()
 	std::cin >> p1name;
 	std::cin >> p2name;
 	
-	m_player1 = new Character(10, 10, p1name);
+	m_player1 = new Character(100, 10, p1name);
 	
-	m_player2 = new Character(10, 10, p2name);
+	m_player2 = new Character(100, 10, p2name);
 	std::cout << p2name << std::endl;
 	/*BinaryFile();*/
 	
@@ -110,6 +110,7 @@ void Game::update()
 		std::cout << m_player2->m_name;
 		std::cout << " Damage has fallen by 5" << std::endl;
 	}
+	std::cout << "Player Twos turn: " << std::endl;
 	std::cin;
 
 	std::cout << m_player2->m_name << std::endl;
@@ -128,12 +129,17 @@ void Game::update()
 		std::cout << " Damage has fallen by 5" << std::endl;
 	}
 	system("CLS");
+	if (m_player1->getHealth() <= 0 || m_player2->getHealth() <= 0)
+	{
+		setGameOver(true);
+	}
 
 }
 
 void Game::draw()
 {
 	std::cout << "Player2 health is: " << m_player2->getHealth() << std::endl;
+	std::cout << "Player1 health is: " << m_player1->getHealth() << std::endl;
 }
 
 void Game::end()
