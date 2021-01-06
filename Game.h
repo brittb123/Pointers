@@ -19,4 +19,5 @@ private:
     Character* m_player1;
     Character* m_player2;
     char answer;
+    char name[8];
 }; 

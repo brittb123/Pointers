@@ -43,8 +43,19 @@ bool BinaryFile()
 
 	file.close();
 
-	Character Jim1 = Character();
 
+	return true;
+
+}
+
+bool BinaryLoad()
+{
+	
+	Character player1 = Character();
+	int index = 0;
+	std::cout << "Which do you wish to load?" << std::endl;
+	std::cin >> index;
+	std::fstream file;
 	file.open("save.txt", std::ios::in, std::ios::binary);
 
 	if (!file.is_open())
@@ -52,39 +63,72 @@ bool BinaryFile()
 		return false;
 	}
 
-	file.seekg(sizeof(Character) * 2, std::ios::beg);
+	file.seekg(sizeof(Character) * index, std::ios::beg);
 
-	file.read((char*)&Jim2, sizeof(Character));
+	file.read((char*)&player1, sizeof(Character));
 
 	file.close();
-
+	std::cout << player1.m_health << std::endl;
+	std::cout << player1.m_damage << std::endl;
 	return true;
 
 }
 
+
 void Game::start()
 {
-	m_player1 = new Character(10, 10);
-	m_player2 = new Character(10, 10);
-	BinaryFile();
+	BinaryLoad();
+	std::cout << "Player 1 what is your name?" << std::endl;
+	char p1name[8];
+	char p2name[8];
+	std::cin >> p1name;
+	std::cin >> p2name;
+	
+	m_player1 = new Character(10, 10, p1name);
+	
+	m_player2 = new Character(10, 10, p2name);
+	std::cout << p2name << std::endl;
+	/*BinaryFile();*/
+	
 }
 
 void Game::update()
 {
-	std::cout << "Player 1 do you want to attack or defend?" << std::endl;
+	
+	std::cout << m_player1->m_name << std::endl;
 	std::cout << "Press z to attack or x to defend" << std::endl;
-	answer = ' ';
+	answer == ' ';
 	std::cin >> answer;
-	if (answer == 'z' | 'Z')
+	if (answer == 'z')
 	{
 		m_player1->attack(m_player2);
 		end();
 	}
-	else if(answer == 'x' | 'X')
+	else if(answer == 'x')
 	{
-		m_player2->m_damage -= 5;
+		m_player1->m_damage -= 5;
+		std::cout << m_player2->m_name;
+		std::cout << " Damage has fallen by 5" << std::endl;
+	}
+	std::cin;
+
+	std::cout << m_player2->m_name << std::endl;
+	std::cout << "Press z to attack or x to defend" << std::endl;
+	answer == ' ';
+	std::cin >> answer;
+	if (answer == 'z')
+	{
+		m_player2->attack(m_player1);
+		end();
+	}
+	else if (answer == 'x')
+	{
+		m_player1->m_damage -= 5;
+		std::cout << m_player1->m_name;
+		std::cout << " Damage has fallen by 5" << std::endl;
 	}
 	system("CLS");
+
 }
 
 void Game::draw()
@@ -96,3 +140,4 @@ void Game::end()
 {
 	
 }
+
